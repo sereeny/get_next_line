@@ -6,7 +6,7 @@
 /*   By: ssandova <ssandova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 20:35:22 by ssandova          #+#    #+#             */
-/*   Updated: 2023/12/11 17:54:05 by ssandova         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:28:30 by ssandova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,18 @@ The allocated memory is filled with bytes of value zero.
 
 void	*ft_calloc_gnl(size_t count, size_t size)
 {
-	void			*ptr;
-	unsigned char	*ptr2;
-	size_t			len;
+	unsigned char	*pointer;
+	size_t			siz;
+	size_t			i;
 
-	len = count * size;
-	ptr = malloc(size * count);
-	if (ptr == NULL)
+	siz = count * size;
+	pointer = malloc(siz);
+	if (pointer == NULL)
 		return (NULL);
-	ptr2 = (unsigned char *)ptr;
-	while (len > 0)
-	{
-		*ptr2 = 0;
-		ptr2++;
-		len--;
-	}
-	return (ptr);
+	i = 0;
+	while (i < siz)
+		pointer[i++] = 0;
+	return (pointer);
 }
 
 /*---------------------------------------------------------------------------
@@ -50,6 +46,8 @@ char	*ft_strchr_gnl(const char *s, int c)
 	int	i;
 
 	i = 0;
+	if (s == NULL)
+		return (NULL);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char)c)
@@ -67,20 +65,20 @@ the given length.
 ----------------------------------------------------------------------------*/
 char	*ft_substr_gnl(char const *s, int start, int len)
 {
-	char				*ptr;
+	char	*pointer;
 	int		i;
 
 	if (start >= ft_strlen_gnl(s))
 		return (ft_calloc_gnl(1, 1));
 	if (len + start > ft_strlen_gnl(s))
 		len = ft_strlen_gnl(s) - start;
-	ptr = (char *)ft_calloc_gnl(len + 1, sizeof(char));
-	if (!ptr)
-		return (0);
+	pointer = (char *)ft_calloc_gnl(len + 1, sizeof(char));
+	if (!pointer)
+		return (NULL);
 	i = 0;
 	while (i < len)
-		ptr[i++] = s[start++];
-	return (ptr);
+		pointer[i++] = s[start++];
+	return (pointer);
 }
 
 /*---------------------------------------------------------------------------
@@ -108,7 +106,11 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	int		i;
 	int		j;
 
-	joined = (char *)ft_calloc_gnl(ft_strlen_gnl(s1) + ft_strlen_gnl(s2)
+	if (s1 == NULL)
+		return (ft_strdup_gnl(s2));
+	if (s2 == NULL)
+		return (ft_strdup_gnl(s1));
+	joined = (char *)ft_calloc_gnl(ft_strlen_gnl(s1) + ft_strlen_gnl(s2) \
 			+ 1, sizeof(char));
 	if (joined == NULL)
 		return (0);

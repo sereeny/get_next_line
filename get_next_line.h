@@ -6,7 +6,7 @@
 /*   By: ssandova <ssandova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 20:22:32 by ssandova          #+#    #+#             */
-/*   Updated: 2023/12/11 17:53:06 by ssandova         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:28:02 by ssandova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 #  define BUFFER_SIZE 3
 # endif
 
-# include <stdio.h>
-# include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <fcntl.h>
+# include <unistd.h>
 
 char	*get_next_line(int fd);
 char	*read_from_file(char *static_buffer, int fd);
